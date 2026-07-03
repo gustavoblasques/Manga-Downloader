@@ -7,12 +7,12 @@ It uses Python, so you need to install Python and it should run just fine.
 As there's still much progress to be done, most functionalities should be added sometime soon.
 
 ## What Works
-[] Search By Title
-[] Chapter download and folder management
+[ ] Search By Title
+[ ] Chapter download and folder management
 
 ## Things i plan to add
-[] Executable so it's easier to run
-[] Configs that you can change
-[] A log of everything that has been downloaded to keep track and avoid using the API unnecessarily
-[] Option to download batches of chapters based on user input
-[] Option to download all chapters from given manga
+[ ] Executable so it's easier to run
+[ ] Configs that you can change
+[ ] A log of everything that has been downloaded to keep track and avoid using the API unnecessarily
+[ ] Option to download batches of chapters based on user input
+[ ] Option to download all chapters from given manga
