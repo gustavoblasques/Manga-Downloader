@@ -23,14 +23,14 @@ def choose_chapters():
     parts = user_input.replace(',',' ').split()
 
     for part in parts:
-        if '-' in parts:
+        if '-' in part:
             start, end = part.split('-')
+            print(start,end)
             for i in range(int(start), int(end) + 1):
                 final_list.append(int(i))
         else:
             final_list.append(int(part))
     return final_list
                 
-
 
 
