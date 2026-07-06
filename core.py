@@ -36,6 +36,4 @@ for i in input_chapters:
 for cap in capitulos:
     print(cap.chapter_id)
     link = get_chapter_link(cap.chapter_id)
-    print(f"Link do capítulo {cap.number}: {link}")
     create_folder_download(manga_final.title,cap.number,cap.title,link)
-    break
