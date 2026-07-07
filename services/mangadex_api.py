@@ -1,10 +1,31 @@
 import requests 
 from models import InfoManga, SavedChapter
+import json
+import os
 
 
 base_url = "https://api.mangadex.org"
 languages = InfoManga.downloadLang
+log_file = "download_log.json"
 
+def load_log():
+     if not os.path.exists(log_file):
+          return {}
+     with open(log_file, "r") as f:
+          return json.load(f)
+
+def register_download(manga_id, chapter_id):
+    log = load_log()
+
+    if manga_id not in log:
+        log[manga_id] = []
+
+    if chapter_id not in log[manga_id]:
+        log[manga_id].append(chapter_id)
+
+        with open(log_file, "w") as f:
+             json.dump(log, f, indent=4)
+        print(f"Capítulo {chapter_id} salvo com sucesso.")
 
 def buscar_id_por_titulo(titulo):
     r = requests.get(
@@ -42,11 +63,16 @@ def manga_info(id):
         )
 ##REVISAR
 def get_chapter_feed(manga_id):
-    chapter_feed = requests.get(f"{base_url}/manga/{manga_id}/feed",
-                     params= {"translatedLanguage[]": languages, "order[chapter]": "asc"})
+    get_chapter_count = requests.get(f"{base_url}/manga/{manga_id}/feed",
+                     params= {"translatedLanguage[]": languages, "limit":1})
     chapter_list = []
+    chapter_count_json = get_chapter_count.json()
+    total_chapters = chapter_count_json["total"]
+    chapter_feed = requests.get(f"{base_url}/manga/{manga_id}/feed",
+                         params= {"translatedLanguage[]": languages, "order[chapter]": "asc", "limit":total_chapters})
     chapters_result = chapter_feed.json()
     processed_chapters = set()
+    print(f"Existem {total_chapters} capítulos disponíveis para este mangá.")
     for data in chapters_result["data"]:
         attr = data["attributes"]
         num = attr["chapter"]
@@ -60,7 +86,6 @@ def get_chapter_feed(manga_id):
             
             chapter_list.append(chapter)
             processed_chapters.add(num)
-    print(chapter_list)
     return chapter_list
 
 def get_chapter_link(chapter_id):
