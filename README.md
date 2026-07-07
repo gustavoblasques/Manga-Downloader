@@ -13,6 +13,6 @@ As there's still much progress to be done, most functionalities should be added 
 ## Things i plan to add
 - [x] Executable so it's easier to run
 - [ ] Configs that you can change
-- [ ] A log of everything that has been downloaded to keep track and avoid downloading repeated chapters
+- [x] A log of everything that has been downloaded to keep track and avoid downloading repeated chapters
 - [x] Option to download batches of chapters based on user input
 - [x] Option to download all chapters from given manga
